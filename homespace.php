@@ -18,6 +18,7 @@
   <p>You'll find your daily, weekly, and scheduled tasks below. Check the tick box to confirm completion and resume wholesomeness. <br> </p>
   <p> Remember, the game is in your mind. Strive to be good to those around you. </p>
 
+<!-- random inspirational/motivational quotes? -->
 
   <h2>Tasks</h2>
 
