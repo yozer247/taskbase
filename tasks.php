@@ -46,8 +46,8 @@ if (isset($_POST["Submit"])){ //set vars, do validation, then submit
   $errors["title"] = "Title must be filled in!";
   }
 //  else{
-//    if(!preg_match('/^[a-zA-Z\s]+$',$taskTitle)){
-  //    $errors["title"] = "Letters and spaces only";
+  // if(!preg_match("/^[a-zA-Z\s]+$",$taskTitle)){
+    //  $errors["title"] = "Letters and spaces only";  //having some issues with this error always showing, will investigate later
     //}
   //}
 
@@ -59,6 +59,18 @@ if (isset($_POST["Submit"])){ //set vars, do validation, then submit
       //$errors["description"] = "Letters and spaces only";
     //}
   //}
+
+  if(empty($taskPriority)){
+    $errors["priority"] = "Must select a priority level!";
+  }
+
+  if(empty($taskDeadline)){
+    $errors["deadline"] = "Must enter a date!";
+  }
+
+  if(strtotime($taskDeadline) < time() ){
+    $errors["deadline"] = "Must enter a date in the future!";
+  }
 
 }
 
@@ -83,16 +95,19 @@ if (isset($_POST["Submit"])){ //set vars, do validation, then submit
   <div> <?= $errors["title"]; ?> </div><br>
   <label for="priority">Priority of Task:</label>
   <select id="priority" name="priority">
+    <option value="none" selected disabled hidden>Select an Option </option>
     <option value="High">High</option>
-    <option value="High">Medium</option>
-    <option value="High">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="Low">Low</option>
   </select>
-  <br><br>
+  <div> <?= $errors["priority"]; ?></div>
+  <br>
   <label for="description">Description:</label>
   <input type="text" id="description" name="description" value="<?= htmlspecialchars($taskDescription)?>"> <!-- make this bigger -->
   <div> <?= $errors["description"]; ?> </div><br>
   <label for="deadline">Deadline:</label>
-  <input type="date" id="deadline" name="deadline"><br><br>
+  <input type="date" id="deadline" name="deadline" value="<?= $taskDeadline?>">
+  <div> <?= $errors["deadline"]; ?></div><br>
   <input type="submit" name="Submit" value="Submit">
 </form>
 
