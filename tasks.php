@@ -1,12 +1,11 @@
 <? //this is a php comment ?>
 <!-- this is a html comment -->
 
-
 <?php
 
 $user = 'root';
 $password = 'root';
-$db = 'tasks';
+$db = 'homespace';
 $host = 'localhost';
 $port = 8889;
 
@@ -20,6 +19,9 @@ $success = mysqli_real_connect(
    $port
 );
 
+if(!$success){
+  echo "Connection error: " . mysqli_connect_error();
+}
 
 
 $errors = ["Title"=>"","priority"=>"", "description"=>"","date"=>""];
@@ -72,7 +74,14 @@ if (isset($_POST["Submit"])){ //set vars, do validation, then submit
     $errors["deadline"] = "Must enter a date in the future!";
   }
 
-}
+  if(!array_filter($errors)){
+    header("Location: homespace.php");
+  }
+
+
+
+
+} //end of IF POST
 
 
 ?>

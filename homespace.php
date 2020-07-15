@@ -1,5 +1,43 @@
 <? //this is php ?>
-<!DOCTYPE php>
+
+
+<?php
+
+$user = 'root';
+$password = 'root';
+$db = 'homespace';
+$host = 'localhost';
+$port = 8889;
+
+$link = mysqli_init();
+$success = mysqli_real_connect(
+   $link,
+   $host,
+   $user,
+   $password,
+   $db,
+   $port
+);
+
+if(!$success){
+  echo "Connection error: " . mysqli_connect_error();
+}
+
+if ($result = mysqli_query($link, "SELECT * FROM tasks")){
+  printf("Select returned %d rows.\n", mysqli_num_rows($result));
+
+
+mysqli_free_result($result);
+
+}
+
+
+
+
+
+?>
+
+
 
 
 <!-- this is a HTML comment -->
@@ -13,7 +51,7 @@
 
 <body>
   <h1><b>Welcome to your Homespace</b></h1>
-  <p> Hello Nathan, let's get started. </p>
+  <p> Hello Nathan, <!-- username --> let's get started. </p>
   <p> This site will help you keep calm, and carry out tasks. I hope you're staying hydrated. <br><br></p>
   <p>You'll find your daily, weekly, and scheduled tasks below. Check the tick box to confirm completion and resume wholesomeness. <br> </p>
   <p> Remember, the game is in your mind. Strive to be good to those around you. </p>
@@ -22,7 +60,6 @@
 
   <h2>Tasks</h2>
 
-php time
 
 
 <br><br><br><br>
