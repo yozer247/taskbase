@@ -18,22 +18,29 @@ $success = mysqli_real_connect(
    $db,
    $port
 );
+// real connect to the MAMP mysql server
 
+//echo an error message if sql connection is not complete
 if(!$success){
   echo "Connection error: " . mysqli_connect_error();
 }
 
-if ($result = mysqli_query($link, "SELECT * FROM tasks")){
-  printf("Select returned %d rows.\n", mysqli_num_rows($result));
+//query
+$sql = "SELECT * FROM tasks";
+
+//fetch results
+$result = mysqli_query($link,$sql);
+
+//results turn into an array
+//$tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
-mysqli_free_result($result);
-
-}
 
 
 
 
+
+print_r($tasks);
 
 ?>
 
@@ -59,6 +66,20 @@ mysqli_free_result($result);
 <!-- random inspirational/motivational quotes? -->
 
   <h2>Tasks</h2>
+
+<? if(mysqli_num_rows($result) > 0 ){
+  while($row = mysqli_fetch_assoc($result)) {
+    echo "Task Number: " . $row["ID"]. " - Title: " . $row["Title"]. " - Description: " . $row["Description"]. " - Deadline: ".$row["Deadline"]." - Priority: ".$row["Priority"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
+//free result from memory
+mysqli_free_result($result);
+
+// close sql connection
+mysqli_close($conn);
+?>
 
 
 
