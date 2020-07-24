@@ -4,22 +4,8 @@
 
 <?php
 
-//connecting to the database
-$user = 'root';
-$password = 'root';
-$db = 'homespace';
-$host = 'localhost';
-$port = 8889;
-
-$link = mysqli_init();
-$success = mysqli_real_connect(
-   $link,
-   $host,
-   $user,
-   $password,
-   $db,
-   $port
-);
+include "sqli_connect.php";
+// real connect to the MAMP mysql server
 //throw error if connection failed
 if(!$success){
   echo "Connection error: " . mysqli_connect_error();
@@ -95,7 +81,7 @@ if (isset($_POST["Submit"])){
 <html>
 <head>
   <meta charset="UTF-8"> <!-- can add more metadata here -->
-  <title>Tasks Interaction</title>
+  <title>Tasks Input</title>
 </head>
 
 <body>

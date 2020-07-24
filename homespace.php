@@ -9,15 +9,7 @@ $db = 'homespace';
 $host = 'localhost';
 $port = 8889;
 
-$link = mysqli_init();
-$success = mysqli_real_connect(
-   $link,
-   $host,
-   $user,
-   $password,
-   $db,
-   $port
-);
+include "sqli_connect.php";
 // real connect to the MAMP mysql server
 
 //echo an error message if sql connection is not complete
