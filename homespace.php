@@ -26,13 +26,22 @@ $result = mysqli_query($link,$sql);
 //results turn into an array
 //$tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+//print_r($tasks);
 
 
 
+//sessions practice
+
+if(isset($_POST['submit'])){
+
+  session_start();
+
+  $_SESSION["name"] = $_POST["name"];
+
+  $userName = $_SESSION["name"];
+}
 
 
-
-print_r($tasks);
 
 ?>
 
@@ -50,7 +59,21 @@ print_r($tasks);
 
 <body>
   <h1><b>Welcome to your Homespace</b></h1>
-  <p> Hello Nathan, <!-- username --> let's get started. </p>
+
+<? if (!$userName): ?>
+
+<form action="homespace.php" method="POST">
+  <label>Enter your name</label>
+  <input type="text" name="name">
+  <input type="submit" name="submit" value="submit">
+</form>
+
+<? else: ?>
+
+<p>Hello, <?= $_POST["name"]?></p>
+
+<? endif; ?>
+
   <p> This site will help you keep calm, and carry out tasks. I hope you're staying hydrated. <br><br></p>
   <p>You'll find your daily, weekly, and scheduled tasks below. Check the tick box to confirm completion and resume wholesomeness. <br> </p>
   <p> Remember, the game is in your mind. Strive to be good to those around you. </p>
